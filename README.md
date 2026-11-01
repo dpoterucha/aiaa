@@ -17,6 +17,8 @@ Almost everything lives in **`data/site-data.js`**. On GitHub, open that file, c
 
 Events automatically sort into **Upcoming** and **Past** by date, and the hero card always shows the next one.
 
+Edits usually show up within 1–2 minutes of committing (watch the **Actions** tab for the green check). If you still see the old version, do a hard refresh (Ctrl+Shift+R, or Cmd+Shift+R on Mac).
+
 If the page goes blank after an edit, you're almost certainly missing a comma or a quote mark. Check the file you just changed.
 
 ## Adding a speaker (about 5 minutes)

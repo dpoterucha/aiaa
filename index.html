@@ -7,7 +7,8 @@
   <meta name="description" content="The UW–Madison student chapter of the American Institute of Aeronautics and Astronautics. A community for everyone interested in aerospace, with speakers, socials, and professional outreach.">
   <meta property="og:title" content="AIAA at UW–Madison">
   <meta property="og:description" content="A community for every Badger interested in aerospace.">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -18,12 +19,9 @@
 
   <header class="nav" id="top">
     <a class="brand" href="#top" aria-label="AIAA at UW–Madison home">
-      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
-        <ellipse cx="20" cy="20" rx="17" ry="7" transform="rotate(-25 20 20)" fill="none" stroke="currentColor" stroke-width="1.6"/>
-        <circle cx="20" cy="20" r="4.5" fill="currentColor"/>
-        <circle cx="34" cy="12.5" r="2" fill="#ffb84d"/>
-      </svg>
-      <span>AIAA <b>UW–Madison</b></span>
+      <img class="brand-logo" src="assets/aiaa-logo-white.png" alt="AIAA">
+      <span class="brand-div" aria-hidden="true"></span>
+      <span class="brand-text">UW–Madison<small>Student Chapter</small></span>
     </a>
     <button class="menu-btn" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span>
@@ -191,14 +189,19 @@
   <footer class="footer">
     <div class="wrap foot">
       <div>
-        <p class="brand small">AIAA <b>UW–Madison</b></p>
+        <p class="brand small"><img class="brand-logo" src="assets/aiaa-logo-white.png" alt="AIAA"><span class="brand-div" aria-hidden="true"></span><span class="brand-text">UW–Madison</span></p>
         <p class="muted tiny">Student chapter of the American Institute of Aeronautics and Astronautics at the University of Wisconsin–Madison.</p>
       </div>
       <div class="foot-links" id="foot-links"></div>
     </div>
   </footer>
 
-  <script src="data/site-data.js"></script>
-  <script src="assets/main.js"></script>
+  <!-- Loads the latest content on every visit, so edits show up without waiting on browser caches -->
+  <script>
+    (function () {
+      var v = Date.now();
+      document.write('<script src="data/site-data.js?v=' + v + '"><\/script><script src="assets/main.js?v=' + v + '"><\/script>');
+    })();
+  </script>
 </body>
 </html>
