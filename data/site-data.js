@@ -31,29 +31,72 @@ window.SITE = {
 };
 
 /* ---------------------------------------------------------------------
-   EVENTS
+   EVENTS  (see README.md → "Adding a speaker" for a step-by-step)
    type: "speaker" | "meeting" | "social" | "tour" | "workshop"
-   For a speaker event, fill in `speaker` and (once you have them)
-   `slides` — put the PDF in the /slides folder and write its path,
-   e.g. "slides/2026-10-21-jeremy-hart.pdf".
+
+   Every field except date, type, and title is optional — leave it ""
+   or [] and that part simply doesn't show.
+     summary    One or two sentences. Shows everywhere.
+     takeaways  Bullet points for the speaker recap (after the talk).
+     rsvp       Link for an RSVP button (Handshake, Google Form...).
+     flyer      Image in /assets/events/
+     photos     Images in /assets/events/ — [{ src: "...", caption: "..." }]
+     slides     PDF in /slides/ — shows an in-page slide viewer
+     links      Extra buttons — [{ label: "...", url: "..." }]
    --------------------------------------------------------------------- */
 window.EVENTS = [
   {
     date: "2026-10-21",
-    time: "",
-    location: "",
+    time: "5:00–6:00 PM",
+    location: "Mechanical Engineering, Room 1153",
     type: "speaker",
-    title: "Kickoff meeting with NASA's Jeremy J. Hart",
+    title: "Engineering Beyond Boundaries: a conversation with NASA's Jeremy J. Hart",
     speaker: {
       name: "Jeremy J. Hart",
-      role: "Deputy Division Chief, Aeroscience and Flight Mechanics Division",
-      org: "NASA",
-      highlights: ["SpaceX Dragon", "Orion", "X-38"]
+      role: "Deputy Division Chief, Aeroscience and Flight Mechanics Division · UW–Madison Engineering Mechanics alum",
+      org: "NASA Johnson Space Center",
+      highlights: ["Artemis / Orion", "Commercial Crew", "Morpheus Lander", "X-38", "Space Shuttle"]
     },
     summary:
-      "Our first-ever chapter meeting. After introducing AIAA and our mission, we welcomed Jeremy J. Hart, Deputy Division Chief of NASA's Aeroscience and Flight Mechanics Division, who has worked on vehicles including SpaceX Dragon, Orion, and the X-38.",
-    slides: "",          // e.g. "slides/2026-10-21-jeremy-hart.pdf"
-    photos: []
+      "Our first chapter meeting featured UW–Madison Engineering Mechanics alum Jeremy J. Hart, who walked us through his career in human spaceflight at NASA's Johnson Space Center and how students can follow a similar path.",
+    takeaways: [
+      "Inside JSC: NASA's center for human spaceflight in Houston, home to Mission Control and astronaut training, with over 10,000 civil service and contractor employees.",
+      "What his division does: aerodynamics and aerothermal, guidance, navigation and control, trajectory design, abort and parachute systems, and independent modeling and simulation, supporting Artemis and Orion, the ISS, and Commercial Crew (SpaceX Dragon and Boeing Starliner).",
+      "Project spotlights: the Morpheus autonomous lander test vehicle and the Artemis II proximity operations demo.",
+      "His career path: project engineer on the X-38 and Shuttle programs, GN&C subsystem lead on Orion and Morpheus, system manager for Commercial Crew, then Deputy Division Chief.",
+      "Getting to NASA: apply for NASA OSTEM and Pathways internships, look at contractor roles (JSC's prime contractor is Amentum), build programming, CAD, and systems engineering skills, and get involved with AIAA, design competitions, and conference papers."
+    ],
+    rsvp: "",
+    flyer: "assets/events/2026-10-21-jeremy-hart-flyer.jpg",
+    photos: [
+      { src: "assets/events/2026-10-21-jeremy-hart-talk.jpg", caption: "Jeremy Hart presenting on Johnson Space Center" }
+    ],
+    slides: "slides/2026-10-21-jeremy-hart.pdf",
+    links: [
+      { label: "Jeremy's career profile", url: "https://drive.google.com/file/d/1uRvNx2MmSnHCujU0Tp643nrr6gLXXGth/view" }
+    ]
+  },
+  {
+    date: "2026-11-05",
+    time: "4:30–5:45 PM",
+    location: "Engineering Hall, Room 1610",
+    type: "speaker",
+    title: "Industry guest speaker: Brent Shultz of Boeing",
+    speaker: {
+      name: "Brent Shultz",
+      role: "Aerospace industry professional",
+      org: "Boeing",
+      highlights: []
+    },
+    summary:
+      "Hear from a Boeing aerospace industry professional about life and work in the industry. Open to all UW students. Food provided!",
+    takeaways: [],                 // fill in after the talk
+    rsvp: "https://www.canvaqr.com/RGWXfKQd3_",
+    rsvpLabel: "RSVP on Handshake",
+    flyer: "assets/events/2026-11-05-boeing-flyer.jpg",
+    photos: [],
+    slides: "",
+    links: []
   },
   {
     date: "2026-10-28",
@@ -82,20 +125,20 @@ window.EVENTS = [
 
 /* ---------------------------------------------------------------------
    OFFICERS
-   photo: leave "" to show initials, or put a square image in
-   /assets/officers/ and write e.g. "assets/officers/keane.jpg"
+   photo: a square image in /assets/officers/ (e.g. "assets/officers/keane.jpg"),
+   or "" to show initials instead. Replace the file to update a photo.
    --------------------------------------------------------------------- */
 window.OFFICERS = [
-  { name: "Keane Frieling",   role: "Co-President",        year: "Junior",    hometown: "Minneapolis, MN",       fact: "Learned drums over the summer",                    email: "kfrieling@wisc.edu", photo: "" },
-  { name: "Ryan Peplinski",   role: "Co-President",        year: "Senior",    hometown: "Racine, WI",            fact: "Coffee and espresso junkie",                       email: "rjpeplinski@wisc.edu", photo: "" },
-  { name: "Osho",             role: "Event Organizer",     year: "Sophomore", hometown: "Chisago City, MN",      fact: "Speaks German",                                    photo: "" },
-  { name: "Umar",             role: "Social Media",        year: "Sophomore", hometown: "Islamabad",             fact: "Can imitate bird calls by whistling",              photo: "" },
-  { name: "Matthew Rabindra", role: "Treasurer",           year: "Sophomore", hometown: "Onalaska, WI",          fact: "Plays piano and drums",                            photo: "" },
-  { name: "Danny",            role: "Fundraising Director",year: "Sophomore", hometown: "La Crosse, WI",         fact: "Can solve a Rubik's cube",                         photo: "" },
-  { name: "Iris Lee",         role: "Secretary",           year: "Freshman",  hometown: "Suwon, Korea",          fact: "Visited Japan and England over the summer",        photo: "" },
-  { name: "Jack",             role: "Outreach",            year: "Junior",    hometown: "Portland, OR",          fact: "Huge fan of early-1900s fountain pens",            photo: "" },
-  { name: "Julia",            role: "Outreach",            year: "Junior",    hometown: "New London, WI",        fact: "Works at Starbucks",                               photo: "" },
-  { name: "Jackson",          role: "Outreach",            year: "Junior",    hometown: "Stevenson Ranch, CA",   fact: "Plays the banjo",                                  photo: "" }
+  { name: "Keane Frieling",   role: "Co-President",        year: "Junior",    hometown: "Minneapolis, MN",       fact: "Learned drums over the summer",                    email: "kfrieling@wisc.edu", photo: "assets/officers/keane.jpg" },
+  { name: "Ryan Peplinski",   role: "Co-President",        year: "Senior",    hometown: "Racine, WI",            fact: "Coffee and espresso junkie",                       email: "rjpeplinski@wisc.edu", photo: "assets/officers/ryan.jpg" },
+  { name: "Osho",             role: "Event Organizer",     year: "Sophomore", hometown: "Chisago City, MN",      fact: "Speaks German",                                    photo: "assets/officers/osho.jpg" },
+  { name: "Umar",             role: "Social Media",        year: "Sophomore", hometown: "Islamabad",             fact: "Can imitate bird calls by whistling",              photo: "assets/officers/umar.jpg" },
+  { name: "Matthew Rabindra", role: "Treasurer",           year: "Sophomore", hometown: "Onalaska, WI",          fact: "Plays piano and drums",                            photo: "assets/officers/matthew.jpg" },
+  { name: "Danny",            role: "Fundraising Director",year: "Sophomore", hometown: "La Crosse, WI",         fact: "Can solve a Rubik's cube",                         photo: "assets/officers/danny.jpg" },
+  { name: "Iris Lee",         role: "Secretary",           year: "Freshman",  hometown: "Suwon, Korea",          fact: "Visited Japan and England over the summer",        photo: "assets/officers/iris.jpg" },
+  { name: "Jack",             role: "Outreach",            year: "Junior",    hometown: "Portland, OR",          fact: "Huge fan of early-1900s fountain pens",            photo: "assets/officers/jack.jpg" },
+  { name: "Julia",            role: "Outreach",            year: "Junior",    hometown: "New London, WI",        fact: "Works at Starbucks",                               photo: "assets/officers/julia.jpg" },
+  { name: "Jackson",          role: "Outreach",            year: "Junior",    hometown: "Stevenson Ranch, CA",   fact: "Plays the banjo",                                  photo: "assets/officers/jackson.jpg" }
 ];
 
 /* ---------------------------------------------------------------------

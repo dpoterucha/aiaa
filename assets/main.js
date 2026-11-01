@@ -33,50 +33,68 @@
   function meta(e) {
     return [e.time, e.location].filter(Boolean).map(esc).join(" · ");
   }
+  function rsvpBtn(e, cls) {
+    return e.rsvp && parse(e.date) >= today ? '<a class="btn small ' + (cls || "primary") + '" href="' + esc(e.rsvp) + '" target="_blank" rel="noopener">' + esc(e.rsvpLabel || "RSVP") + "</a>" : "";
+  }
   function eventCard(e) {
-    var x = parse(e.date), m = meta(e);
+    var x = parse(e.date), m = meta(e), r = rsvpBtn(e);
     var title = e.type === "speaker" && e.speaker ? '<a href="#speaker-' + e.date + '">' + esc(e.title) + "</a>" : esc(e.title);
     return '<article class="event">' +
       '<div class="datebox"><div class="m">' + MON[x.getMonth()] + '</div><div class="d">' + x.getDate() + '</div><div class="w">' + DAY[x.getDay()] + "</div></div>" +
       '<div class="e-body"><h3>' + title + "</h3>" + (m ? '<div class="meta">' + m + "</div>" : "") +
-      (e.summary ? "<p>" + esc(e.summary) + "</p>" : "") + "</div>" +
+      (e.summary ? "<p>" + esc(e.summary) + "</p>" : "") + (r ? '<div class="cta-row e-cta">' + r + "</div>" : "") + "</div>" +
       '<span class="type t-' + esc(e.type) + '">' + (TYPE[e.type] || esc(e.type)) + "</span></article>";
   }
   $("#upcoming").innerHTML = upcoming.length ? upcoming.map(eventCard).join("") :
-    '<div class="empty">The next meeting is being scheduled. <a data-x href="' + esc((S.links || {}).slack || "#join") + '" target="_blank" rel="noopener">Join our Slack</a> to hear about it first.</div>';
+    '<div class="empty">The next meeting is being scheduled. <a href="' + esc((S.links || {}).slack || "#join") + '" target="_blank" rel="noopener">Join our Slack</a> to hear about it first.</div>';
   $("#past").innerHTML = past.length ? past.map(eventCard).join("") : '<div class="empty">Nothing here yet.</div>';
 
   /* next event card in hero */
   var nx = upcoming[0], card = $("#next-event");
   if (nx) {
-    card.innerHTML = '<div class="label">Next up</div><h3>' + esc(nx.title) + '</h3><div class="meta">' + longDate(nx.date) + (meta(nx) ? " · " + meta(nx) : "") + "</div>" +
-      (nx.summary ? '<p class="muted">' + esc(nx.summary.length > 150 ? nx.summary.slice(0, 147) + "…" : nx.summary) + "</p>" : "") +
-      '<a class="btn small ghost" href="#events">All events</a>';
+    var who = nx.speaker ? '<div class="who">' + esc(nx.speaker.name) + (nx.speaker.org ? " · " + esc(nx.speaker.org) : "") + "</div>" : "";
+    card.innerHTML = (nx.flyer ? '<a class="next-flyer" href="' + esc(nx.flyer) + '" target="_blank" rel="noopener"><img src="' + esc(nx.flyer) + '" alt="Event flyer"></a>' : "") +
+      '<div class="next-body"><div class="label">Next up</div><h3>' + esc(nx.title) + "</h3>" + who + '<div class="meta">' + longDate(nx.date) + (meta(nx) ? "<br>" + meta(nx) : "") + "</div>" +
+      '<div class="cta-row">' + rsvpBtn(nx) + '<a class="btn small ghost" href="' + (nx.speaker ? "#speaker-" + nx.date : "#events") + '">Details</a></div></div>';
   } else {
     var last = sorted.filter(function (e) { return e.type === "speaker"; }).pop();
-    card.innerHTML = '<div class="label">Meetings this semester</div><h3>Weekly meetings, announced on Slack</h3>' +
+    card.innerHTML = '<div class="next-body"><div class="label">Meetings this semester</div><h3>Weekly meetings, announced on Slack</h3>' +
       '<p class="muted">Speakers, socials, and career events throughout the year.' + (last && last.speaker ? " Most recently: " + esc(last.speaker.name) + (last.speaker.org ? " of " + esc(last.speaker.org) : "") + "." : "") + "</p>" +
-      '<a class="btn small ghost" href="#speakers">Speaker series</a>';
+      '<a class="btn small ghost" href="#speakers">Speaker series</a></div>';
   }
 
   /* speakers */
-  var talks = sorted.filter(function (e) { return e.type === "speaker" && e.speaker; }).reverse();
+  var talks = sorted.filter(function (e) { return e.type === "speaker" && e.speaker; });
+  talks = talks.filter(function (e) { return parse(e.date) >= today; }).concat(talks.filter(function (e) { return parse(e.date) < today; }).reverse());
   $("#speaker-list").innerHTML = talks.length ? talks.map(function (e) {
-    var s = e.speaker, isPast = parse(e.date) < today, slides;
+    var s = e.speaker, isPast = parse(e.date) < today, btns = [], media = [];
+    var r = rsvpBtn(e); if (r) btns.push(r);
     if (e.slides) {
-      slides = '<div class="cta-row"><a class="btn small primary" href="' + esc(e.slides) + '" target="_blank" rel="noopener">View slides</a>' +
-        '<a class="btn small ghost" href="' + esc(e.slides) + '" download>Download PDF</a></div>' +
-        (/\.pdf($|\?)/i.test(e.slides) ? '<div class="slides-frame"><iframe src="' + esc(e.slides) + '#view=FitH" title="Slides from ' + esc(s.name) + '" loading="lazy"></iframe></div>' : "");
-    } else {
-      slides = '<span class="slides-pending">Slides ' + (isPast ? "coming soon" : "posted after the talk") + "</span>";
+      btns.push('<a class="btn small ' + (r ? "ghost" : "primary") + '" href="' + esc(e.slides) + '" target="_blank" rel="noopener">View slides</a>');
+      btns.push('<a class="btn small ghost" href="' + esc(e.slides) + '" download>Download slides</a>');
     }
-    return '<article class="speaker" id="speaker-' + e.date + '">' +
-      '<div class="speaker-side"><div class="speaker-avatar">' + (s.photo ? '<img src="' + esc(s.photo) + '" alt="' + esc(s.name) + '">' : initials(s.name)) + "</div>" +
+    (e.links || []).forEach(function (l) { btns.push('<a class="btn small ghost" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + "</a>"); });
+    (e.photos || []).forEach(function (ph) {
+      media.push('<figure><a href="' + esc(ph.src) + '" target="_blank" rel="noopener"><img src="' + esc(ph.src) + '" alt="' + esc(ph.caption || "Event photo") + '" loading="lazy"></a>' + (ph.caption ? "<figcaption>" + esc(ph.caption) + "</figcaption>" : "") + "</figure>");
+    });
+    if (e.flyer) media.push('<figure class="flyer"><a href="' + esc(e.flyer) + '" target="_blank" rel="noopener"><img src="' + esc(e.flyer) + '" alt="Event flyer" loading="lazy"></a><figcaption>Event flyer</figcaption></figure>');
+    var tk = e.takeaways || [];
+    var pending = !e.slides && isPast ? '<span class="slides-pending">Slides coming soon</span>' : "";
+    return '<article class="speaker' + (isPast ? "" : " upcoming") + '" id="speaker-' + e.date + '">' +
+      '<div class="speaker-side">' + (isPast ? "" : '<span class="soon">Upcoming</span>') + '<div class="speaker-avatar">' + (s.photo ? '<img src="' + esc(s.photo) + '" alt="' + esc(s.name) + '">' : initials(s.name)) + "</div>" +
       "<div>" + (s.org ? '<div class="org">' + esc(s.org) + "</div>" : "") + '<p class="name">' + esc(s.name) + '</p><p class="role">' + esc(s.role || "") + "</p></div></div>" +
       '<div class="speaker-main"><div class="date">' + longDate(e.date) + (meta(e) ? " · " + meta(e) : "") + "</div><h3>" + esc(e.title) + "</h3>" +
       ((s.highlights || []).length ? '<div class="tags">' + s.highlights.map(function (h) { return '<span class="tag">' + esc(h) + "</span>"; }).join("") + "</div>" : "") +
-      (e.summary ? "<p>" + esc(e.summary) + "</p>" : "") + slides + "</div></article>";
+      (e.summary ? "<p>" + esc(e.summary) + "</p>" : "") +
+      (tk.length ? '<h4 class="tk-head">Key takeaways</h4><ul class="takeaways">' + tk.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" : "") +
+      (media.length ? '<div class="media">' + media.join("") + "</div>" : "") +
+      (btns.length || pending ? '<div class="cta-row">' + btns.join("") + pending + "</div>" : "") +
+      (e.slides && /\.pdf($|\?)/i.test(e.slides) ? '<details class="slides-wrap"><summary>Flip through the slides here</summary><div class="slides-frame"><iframe data-src="' + esc(e.slides) + '#view=FitH" title="Slides from ' + esc(s.name) + '"></iframe></div></details>' : "") +
+      "</div></article>";
   }).join("") : '<div class="empty">Our first speaker is coming soon.</div>';
+  document.querySelectorAll(".slides-wrap").forEach(function (d) {
+    d.addEventListener("toggle", function () { var f = d.querySelector("iframe"); if (d.open && !f.src) f.src = f.getAttribute("data-src"); });
+  });
 
   /* officers */
   $("#officer-grid").innerHTML = OF.map(function (o) {
