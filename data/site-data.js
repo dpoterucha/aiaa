@@ -21,7 +21,7 @@ window.SITE = {
     slack: "https://join.slack.com/t/uwmadaiaa/shared_invite/zt-4eexhxt8j-Ik4~rOqSTO9fUK9BdNPocg",
     interestForm: "https://docs.google.com/forms/d/e/1FAIpQLSdpjlOmiB7hzR9qjoyG7FdHMJpQcgkKW2WcESAeekOjjaQXgQ/viewform",
     aiaaNational: "https://www.aiaa.org/membership",
-    instagram: "" // add your Instagram URL here and an icon appears in the footer
+    instagram: "https://www.instagram.com/aiaauwmadison/" // add your Instagram URL here and an icon appears in the footer
   },
 
   contacts: [
@@ -108,6 +108,16 @@ window.EVENTS = [
       "Officer introductions, an overview of what AIAA is and what we're planning this year, and a paper-airplane icebreaker — everyone threw a plane, picked up a stranger's, and went to find its owner.",
     slides: "",
     photos: []
+  },
+   {
+    date: "2026-11-4",
+    time: "6:00 PM",
+    location: "Mechanical Engineering Building, room 1153",
+    type: "meeting",
+    title: "General meeting",
+    summary: "",
+    slides: "",
+    photos: []
   }
   /* Copy this block to add a new event:
   ,{
@@ -131,14 +141,14 @@ window.EVENTS = [
 window.OFFICERS = [
   { name: "Keane Frieling",   role: "Co-President",        year: "Junior",    hometown: "Minneapolis, MN",       fact: "Learned drums over the summer",                    email: "kfrieling@wisc.edu", photo: "assets/officers/keane.jpg" },
   { name: "Ryan Peplinski",   role: "Co-President",        year: "Senior",    hometown: "Racine, WI",            fact: "Coffee and espresso junkie",                       email: "rjpeplinski@wisc.edu", photo: "assets/officers/ryan.jpg" },
-  { name: "Osho",             role: "Event Organizer",     year: "Sophomore", hometown: "Chisago City, MN",      fact: "Speaks German",                                    photo: "assets/officers/osho.jpg" },
-  { name: "Umar",             role: "Social Media",        year: "Sophomore", hometown: "Islamabad",             fact: "Can imitate bird calls by whistling",              photo: "assets/officers/umar.jpg" },
+  { name: "Osho Villafan",    role: "Event Organizer",     year: "Sophomore", hometown: "Chisago City, MN",      fact: "Speaks German",                                    photo: "assets/officers/osho.jpg" },
+  { name: "Umar Qazi",        role: "Social Media",        year: "Sophomore", hometown: "Islamabad",             fact: "Can imitate bird calls by whistling",              photo: "assets/officers/umar.jpg" },
   { name: "Matthew Rabindra", role: "Treasurer",           year: "Sophomore", hometown: "Onalaska, WI",          fact: "Plays piano and drums",                            photo: "assets/officers/matthew.jpg" },
-  { name: "Danny",            role: "Fundraising Director",year: "Sophomore", hometown: "La Crosse, WI",         fact: "Can solve a Rubik's cube",                         photo: "assets/officers/danny.jpg" },
+  { name: "Danny Poterucha",  role: "Fundraising Director",year: "Sophomore", hometown: "La Crosse, WI",         fact: "Can solve a Rubik's cube",                         photo: "assets/officers/danny.jpg" },
   { name: "Iris Lee",         role: "Secretary",           year: "Freshman",  hometown: "Suwon, Korea",          fact: "Visited Japan and England over the summer",        photo: "assets/officers/iris.jpg" },
-  { name: "Jack",             role: "Outreach",            year: "Junior",    hometown: "Portland, OR",          fact: "Huge fan of early-1900s fountain pens",            photo: "assets/officers/jack.jpg" },
-  { name: "Julia",            role: "Outreach",            year: "Junior",    hometown: "New London, WI",        fact: "Works at Starbucks",                               photo: "assets/officers/julia.jpg" },
-  { name: "Jackson",          role: "Outreach",            year: "Junior",    hometown: "Stevenson Ranch, CA",   fact: "Plays the banjo",                                  photo: "assets/officers/jackson.jpg" }
+  { name: "Jack Johnston",    role: "Outreach",            year: "Junior",    hometown: "Portland, OR",          fact: "Huge fan of early-1900s fountain pens",            photo: "assets/officers/jack.jpg" },
+  { name: "Julia Ludick",     role: "Outreach",            year: "Junior",    hometown: "New London, WI",        fact: "Works at Starbucks",                               photo: "assets/officers/julia.jpg" },
+  { name: "Jackson Povletich",role: "Outreach",            year: "Junior",    hometown: "Stevenson Ranch, CA",   fact: "Plays the banjo",                                  photo: "assets/officers/jackson.jpg" }
 ];
 
 /* ---------------------------------------------------------------------
