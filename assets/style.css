@@ -58,12 +58,9 @@ p { margin: 0 0 1em; }
 .brand { display: flex; align-items: center; gap: 10px; color: var(--text); font: 600 1.05rem var(--head); }
 .brand b { color: var(--accent-2); font-weight: 600; }
 .brand.small { font-size: 1.1rem; margin-bottom: 6px; }
-.brand-logo { height: 30px; width: auto; display: block; }
-.brand-div { width: 1px; height: 28px; background: var(--line-2); }
-.brand-text { display: flex; flex-direction: column; line-height: 1.1; font: 600 1.02rem var(--head); color: var(--text); }
-.brand-text small { font: 500 .66rem var(--head); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-top: 3px; }
-.brand.small { display: flex; align-items: center; gap: 12px; }
-.brand.small .brand-logo { height: 22px; }
+.brand-logo { height: 17px; width: auto; display: block; opacity: .95; }
+.brand.small { display: flex; align-items: center; }
+.brand.small .brand-logo { height: 15px; }
 .links { display: flex; gap: 26px; align-items: center; font-size: .95rem; }
 .links a { color: var(--muted); }
 .links a:hover { color: #fff; }
