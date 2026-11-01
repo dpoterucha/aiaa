@@ -149,7 +149,7 @@ window.OFFICERS = [
   { name: "Jack Johnston",    role: "Outreach",            year: "Junior",    hometown: "Portland, OR",          fact: "Huge fan of early-1900s fountain pens",            photo: "assets/officers/jack.jpg" },
   { name: "Julia Ludick",     role: "Outreach",            year: "Junior",    hometown: "New London, WI",        fact: "Works at Starbucks",                               photo: "assets/officers/julia.jpg" },
   { name: "Jackson Povletich",role: "Outreach",            year: "Junior",    hometown: "Stevenson Ranch, CA",   fact: "Plays the banjo",                                  photo: "assets/officers/jackson.jpg" },
-  { name: "Evan Bauer",       role: "Officer",             year: "Sophomore", hometown: "New Jersey",            fact: "",                                                 photo: "assets/officers/evan.jpg" }
+  { name: "Evan Bauer",       role: "Outreach",            year: "Sophomore", hometown: "New Jersey",            fact: "",                                                 photo: "assets/officers/evan.jpg" }
 ];
 
 /* ---------------------------------------------------------------------
