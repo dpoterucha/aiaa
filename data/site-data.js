@@ -108,16 +108,6 @@ window.EVENTS = [
       "Officer introductions, an overview of what AIAA is and what we're planning this year, and a paper-airplane icebreaker — everyone threw a plane, picked up a stranger's, and went to find its owner.",
     slides: "",
     photos: []
-  },
-   {
-    date: "2026-11-4",
-    time: "6:00 PM",
-    location: "Mechanical Engineering Building, room 1153",
-    type: "meeting",
-    title: "General meeting",
-    summary: "",
-    slides: "",
-    photos: []
   }
   /* Copy this block to add a new event:
   ,{
